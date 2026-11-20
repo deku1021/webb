@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Почка — страница 2</title>
+<style>
+*{margin:0;padding:0;box-sizing:border-box}
+html{scroll-behavior:smooth}
+body{font-family:'Segoe UI',system-ui,sans-serif;background:#0a0e1a;color:#e8eaf6;overflow-x:hidden}
+#bg{position:fixed;inset:0;z-index:0;pointer-events:none}
+nav{position:fixed;top:0;left:0;right:0;z-index:10;display:flex;justify-content:space-between;align-items:center;padding:18px 40px;background:rgba(10,14,26,.6);backdrop-filter:blur(12px);border-bottom:1px solid rgba(255,255,255,.06)}
+nav .logo{font-weight:700;font-size:18px;background:linear-gradient(90deg,#4dd0e1,#7c4dff);-webkit-background-clip:text;background-clip:text;color:transparent}
+nav a{color:#c5cae9;text-decoration:none;margin-left:24px;font-size:14px;transition:.3s}
+nav a:hover{color:#4dd0e1}
+section{position:relative;z-index:2;min-height:100vh;padding:100px 8vw;display:flex;flex-direction:column;justify-content:center}
+.hero{align-items:center;text-align:center}
+.hero h1{font-size:clamp(40px,7vw,90px);font-weight:900;line-height:.95;background:linear-gradient(135deg,#4dd0e1,#7c4dff 50%,#ff4081);-webkit-background-clip:text;background-clip:text;color:transparent}
+.hero p{max-width:640px;margin:24px auto 0;font-size:18px;color:#9fa8da;line-height:1.6}
+.btn{padding:14px 32px;border-radius:40px;font-weight:600;cursor:pointer;transition:.3s;border:none;font-size:15px;display:inline-block;text-decoration:none}
+.btn-primary{background:linear-gradient(135deg,#4dd0e1,#7c4dff);color:#fff;box-shadow:0 10px 40px rgba(124,77,255,.35)}
+.btn-primary:hover{transform:translateY(-3px);box-shadow:0 16px 50px rgba(124,77,255,.5)}
+.btn-ghost{background:transparent;border:1px solid rgba(255,255,255,.2);color:#e8eaf6}
+.btn-ghost:hover{border-color:#4dd0e1;color:#4dd0e1}
+.grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(260px,1fr));gap:24px}
+.card{background:linear-gradient(180deg,rgba(255,255,255,.06),rgba(255,255,255,.02));border:1px solid rgba(255,255,255,.08);border-radius:20px;padding:32px;transition:.4s;position:relative;overflow:hidden}
+.card:hover{transform:translateY(-8px);border-color:rgba(77,208,225,.4);box-shadow:0 20px 60px rgba(0,0,0,.4)}
+.card .icon{font-size:36px;margin-bottom:16px}
+.card h3{font-size:20px;margin-bottom:10px;color:#fff}
+.card p{color:#9fa8da;line-height:1.6;font-size:14px}
+.reveal{opacity:0;transform:translateY(40px);transition:.8s}
+.reveal.in{opacity:1;transform:none}
+footer{text-align:center;padding:40px;color:#5c6bc0;font-size:13px;border-top:1px solid rgba(255,255,255,.06)}
+</style>
+</head>
+<body>
+<canvas id="bg"></canvas>
+<nav><div class="logo">NEPHROS</div><div><a href="index.html">Главная</a><a href="#diseases">Болезни</a><a href="#care">Уход</a></div></nav>
+<section class="hero"><h1>ЗАБОЛЕВАНИЯ<br>И УХОД</h1><p>Вторая страница: болезни почек, профилактика и рекомендации по здоровью.</p><a href="index.html" class="btn btn-ghost" style="margin-top:30px">← Назад</a></section>
+<section id="diseases"><h2 class="reveal">Болезни почек</h2><div class="grid">
+<div class="card reveal"><div class="icon">🩸</div><h3>Гломерулонефрит</h3><p>Воспаление клубочков, часто после инфекций.</p></div>
+<div class="card reveal"><div class="icon">🪨</div><h3>Мочекаменная болезнь</h3><p>Образование камней в почках и мочеточниках.</p></div>
+<div class="card reveal"><div class="icon">⚠️</div><h3>Почечная недостаточность</h3><p>Снижение функции фильтрации, требует лечения.</p></div>
+<div class="card reveal"><div class="icon">🦠</div><h3>Пиелонефрит</h3><p>Инфекционное воспаление почечной лоханки.</p></div>
+</div></section>
+<section id="care"><h2 class="reveal">Уход за почками</h2><div class="grid">
+<div class="card reveal"><div class="icon">💧</div><h3>Питьё</h3><p>1.5-2 литра воды в день.</p></div>
+<div class="card reveal"><div class="icon">🥗</div><h3>Питание</h3><p>Ограничить соль, белок при болезнях.</p></div>
+<div class="card reveal"><div class="icon">🏃</div><h3>Активность</h3><p>Регулярные физические нагрузки.</p></div>
+<div class="card reveal"><div class="icon">🩺</div><h3>Обследования</h3><p>Анализ мочи и УЗИ раз в год.</p></div>
+</div></section>
+<footer>© 2026 NEPHROS</footer>
+<script>
+const canvas=document.getElementById('bg'),ctx=canvas.getContext('2d');
+let w,h,pts=[];
+function resize(){w=canvas.width=innerWidth;h=canvas.height=innerHeight}
+resize();addEventListener('resize',resize);
+for(let i=0;i<120;i++)pts.push({x:Math.random()*w,y:Math.random()*h,vx:(Math.random()-.5)*.3,vy:(Math.random()-.5)*.3,r:Math.random()*1.5+0.5});
+function draw(){ctx.clearRect(0,0,w,h);for(const p of pts){p.x+=p.vx;p.y+=p.vy;if(p.x<0||p.x>w)p.vx*=-1;if(p.y<0||p.y>h)p.vy*=-1;ctx.beginPath();ctx.arc(p.x,p.y,p.r,0,Math.PI*2);ctx.fillStyle='rgba(124,77,255,.5)';ctx.fill()}for(let i=0;i<pts.length;i++)for(let j=i+1;j<pts.length;j++){const a=pts[i],b=pts[j],d=Math.hypot(a.x-b.x,a.y-b.y);if(d<120){ctx.strokeStyle=`rgba(77,208,225,${(1-d/120)*.25})`;ctx.lineWidth=1;ctx.beginPath();ctx.moveTo(a.x,a.y);ctx.lineTo(b.x,b.y);ctx.stroke()}}requestAnimationFrame(draw)}
+draw();
+const io=new IntersectionObserver(entries=>{entries.forEach(e=>{if(e.isIntersecting)e.target.classList.add('in')})},{threshold:.15});
+document.querySelectorAll('.reveal').forEach(el=>io.observe(el));
+</script>
+</body>
+</html>
